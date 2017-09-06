@@ -1,0 +1,3 @@
+
+.. per installare "HTML Agility Pack" andare su Package Manager (NuGet) ed eseguire:
+Install-Package HtmlAgilityPack -Version 1.5.2
