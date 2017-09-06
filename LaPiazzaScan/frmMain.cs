@@ -45,7 +45,13 @@ namespace LaPiazzaScan
                     curRow++;
 
                     string descr = n2.ChildNodes[1].InnerText.Replace("\t", "");
-                    string[] values = { descr, n2.ChildNodes[1].Attributes[0].Value };
+                    string link = n2.ChildNodes[1].Attributes[0].Value;
+
+                    // determinazione dell'id annuncio
+                    int s1 = link.IndexOf("offerte-lavoro&id=");
+                    string jobId = link.Substring(s1 + 18, 5);
+
+                    string[] values = { descr, link, jobId };
                     ListViewItem row = lsvResults.Items.Add(new ListViewItem(values));
                     if (curRow % 2 == 0) {
                         row.BackColor = Color.LightGray;

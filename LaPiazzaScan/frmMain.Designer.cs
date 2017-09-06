@@ -37,6 +37,7 @@
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colLink = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblTotAnn = new System.Windows.Forms.Label();
+            this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.topPages)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,12 +99,13 @@
             this.lsvResults.CheckBoxes = true;
             this.lsvResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colTitle,
-            this.colLink});
+            this.colLink,
+            this.colID});
             this.lsvResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvResults.FullRowSelect = true;
             this.lsvResults.Location = new System.Drawing.Point(15, 98);
             this.lsvResults.Name = "lsvResults";
-            this.lsvResults.Size = new System.Drawing.Size(1037, 480);
+            this.lsvResults.Size = new System.Drawing.Size(1076, 480);
             this.lsvResults.TabIndex = 5;
             this.lsvResults.UseCompatibleStateImageBehavior = false;
             this.lsvResults.View = System.Windows.Forms.View.Details;
@@ -128,11 +130,15 @@
             this.lblTotAnn.TabIndex = 6;
             this.lblTotAnn.Text = "Tot. Annunci:";
             // 
+            // colID
+            // 
+            this.colID.Text = "ID";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1064, 590);
+            this.ClientSize = new System.Drawing.Size(1103, 590);
             this.Controls.Add(this.lblTotAnn);
             this.Controls.Add(this.lsvResults);
             this.Controls.Add(this.topPages);
@@ -159,6 +165,7 @@
         private System.Windows.Forms.ColumnHeader colTitle;
         private System.Windows.Forms.ColumnHeader colLink;
         private System.Windows.Forms.Label lblTotAnn;
+        private System.Windows.Forms.ColumnHeader colID;
     }
 }
 
