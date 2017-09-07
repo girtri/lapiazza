@@ -7,12 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 using HtmlAgilityPack;
 
 namespace LaPiazzaScan
 {
     public partial class frmMain : Form
     {
+        private string _pathData = Path.Combine(Application.StartupPath, "datalist.ini");
+
         public frmMain()
         {
             InitializeComponent();
@@ -39,8 +42,7 @@ namespace LaPiazzaScan
 
                 first = false;
                 var doc = web.Load(url);
-                foreach (HtmlNode n in doc.DocumentNode.SelectNodes(xpath1))
-                {
+                foreach (HtmlNode n in doc.DocumentNode.SelectNodes(xpath1)) {
                     HtmlNode n2 = n.SelectSingleNode("./div[@class='item_desc']");
                     curRow++;
 
@@ -61,6 +63,12 @@ namespace LaPiazzaScan
                 }
             }
 
+            // aggiornamento colonna dei già selezionati
+            foreach (ListViewItem row in lsvResults.Items) {
+                bool found = DatiAnnuncio.TrovaId(_pathData, row.SubItems[2].Text);
+                row.Checked = found;
+            }
+
             lblTotAnn.Text = "Tot. Annunci: " + curRow.ToString();
             this.Cursor = Cursors.Default;
         }
@@ -69,8 +77,69 @@ namespace LaPiazzaScan
         {
             ListViewItem item = lsvResults.SelectedItems[0];
             item.Checked = true;
+
             string link = @"http://annuncilapiazza.it/ricerca/" + item.SubItems[1].Text;
+            string jobId = item.SubItems[2].Text;
+
+            // aggiungere id alla lista degli annunci letti
+            bool found = DatiAnnuncio.TrovaId(_pathData, jobId);
+
+            if (!found) {
+                GeneraEntry(jobId);
+            }
+
             System.Diagnostics.Process.Start(link);
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            Program.extraData = new DatiAnnuncio();
+
+            if (!File.Exists(_pathData)) {
+                // Create a file to write to.
+                using (StreamWriter sw = File.CreateText(_pathData)) {
+                    //sw.WriteLine("Hello");
+                }
+            }
+        }
+
+        private void GeneraEntry(string jobId)
+        {
+            using (StreamWriter sw = File.AppendText(_pathData)) {
+                sw.WriteLine("[" + jobId + "]");
+                sw.WriteLine("contattato=NO");
+                sw.WriteLine("data_contatto=none");
+                sw.WriteLine("messaggio=none");
+                sw.WriteLine("note=none");
+            }
+        }
+
+        private void menuEditItem_Click(object sender, EventArgs e)
+        {
+            if (lsvResults.SelectedItems.Count > 0) {
+                ListViewItem row = lsvResults.SelectedItems[0];
+                string jobId = row.SubItems[2].Text;
+                frmDatiAnnuncio formDatiExtra = new frmDatiAnnuncio(jobId);
+                formDatiExtra.ShowDialog();
+
+                if (!Program.extraData.Annulla) {
+                    bool found = DatiAnnuncio.TrovaId(_pathData, jobId);
+                    if (!found) {
+                        GeneraEntry(jobId);
+                    }
+
+                    // scrittura dati
+                    FileIni ini = new FileIni();
+                    ini.IniFile(_pathData);
+                    ini.Write("contattato", Program.extraData.Contattato, jobId);
+                    ini.Write("data_contatto", DateTime.Now.ToShortDateString(), jobId);
+                    ini.Write("messaggio", Program.extraData.Messaggio, jobId);
+                    ini.Write("note", Program.extraData.Annotazioni, jobId);
+
+                    row.Checked = true;
+                    row.BackColor = Color.LightSalmon;
+                }
+            }
         }
     }
 }

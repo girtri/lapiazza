@@ -18,5 +18,7 @@ namespace LaPiazzaScan
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmMain());
         }
+
+        public static DatiAnnuncio extraData;
     }
 }

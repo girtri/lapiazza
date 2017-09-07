@@ -49,6 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatiAnnuncio.cs" />
+    <Compile Include="FileIni.cs" />
+    <Compile Include="frmDatiAnnuncio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDatiAnnuncio.Designer.cs">
+      <DependentUpon>frmDatiAnnuncio.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -57,6 +65,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmDatiAnnuncio.resx">
+      <DependentUpon>frmDatiAnnuncio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>

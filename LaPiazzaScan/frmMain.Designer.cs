@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblUrl = new System.Windows.Forms.Label();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.cmdScan = new System.Windows.Forms.Button();
@@ -36,9 +37,12 @@
             this.lsvResults = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colLink = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lblTotAnn = new System.Windows.Forms.Label();
             this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.actionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuEditItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lblTotAnn = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.topPages)).BeginInit();
+            this.actionMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUrl
@@ -61,9 +65,10 @@
             // 
             // cmdScan
             // 
+            this.cmdScan.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmdScan.Location = new System.Drawing.Point(782, 22);
             this.cmdScan.Name = "cmdScan";
-            this.cmdScan.Size = new System.Drawing.Size(72, 19);
+            this.cmdScan.Size = new System.Drawing.Size(94, 34);
             this.cmdScan.TabIndex = 2;
             this.cmdScan.Text = "SCAN";
             this.cmdScan.UseVisualStyleBackColor = true;
@@ -82,6 +87,16 @@
             // 
             this.topPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.topPages.Location = new System.Drawing.Point(83, 61);
+            this.topPages.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.topPages.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.topPages.Name = "topPages";
             this.topPages.Size = new System.Drawing.Size(36, 21);
             this.topPages.TabIndex = 4;
@@ -101,6 +116,7 @@
             this.colTitle,
             this.colLink,
             this.colID});
+            this.lsvResults.ContextMenuStrip = this.actionMenu;
             this.lsvResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsvResults.FullRowSelect = true;
             this.lsvResults.Location = new System.Drawing.Point(15, 98);
@@ -121,18 +137,32 @@
             this.colLink.Text = "Link";
             this.colLink.Width = 300;
             // 
+            // colID
+            // 
+            this.colID.Text = "ID";
+            // 
+            // actionMenu
+            // 
+            this.actionMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuEditItem});
+            this.actionMenu.Name = "actionMenu";
+            this.actionMenu.Size = new System.Drawing.Size(95, 26);
+            // 
+            // menuEditItem
+            // 
+            this.menuEditItem.Name = "menuEditItem";
+            this.menuEditItem.Size = new System.Drawing.Size(94, 22);
+            this.menuEditItem.Text = "Edit";
+            this.menuEditItem.Click += new System.EventHandler(this.menuEditItem_Click);
+            // 
             // lblTotAnn
             // 
             this.lblTotAnn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotAnn.Location = new System.Drawing.Point(779, 59);
+            this.lblTotAnn.Location = new System.Drawing.Point(779, 63);
             this.lblTotAnn.Name = "lblTotAnn";
             this.lblTotAnn.Size = new System.Drawing.Size(146, 22);
             this.lblTotAnn.TabIndex = 6;
             this.lblTotAnn.Text = "Tot. Annunci:";
-            // 
-            // colID
-            // 
-            this.colID.Text = "ID";
             // 
             // frmMain
             // 
@@ -148,7 +178,9 @@
             this.Controls.Add(this.lblUrl);
             this.Name = "frmMain";
             this.Text = "LaPiazza scanner";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.topPages)).EndInit();
+            this.actionMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -166,6 +198,8 @@
         private System.Windows.Forms.ColumnHeader colLink;
         private System.Windows.Forms.Label lblTotAnn;
         private System.Windows.Forms.ColumnHeader colID;
+        private System.Windows.Forms.ContextMenuStrip actionMenu;
+        private System.Windows.Forms.ToolStripMenuItem menuEditItem;
     }
 }
 
