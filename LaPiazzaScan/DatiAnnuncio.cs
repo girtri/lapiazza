@@ -13,19 +13,23 @@ namespace LaPiazzaScan
         public string Messaggio;
         public string Annotazioni;
         public string Nascosto;
+        public string Evidenzia;
         public bool Annulla;
 
-        public static bool TrovaId(string pathIni, string jobId, ref string nascosto)
+        public static bool TrovaId(string pathIni, string jobId, ref DatiAnnuncio annuncio)
         {
             bool res = false;
             FileIni mydata = new FileIni();
             
             mydata.IniFile(pathIni);
             res = mydata.KeyExists("nascosto", jobId);
-            if (res)
-                nascosto = mydata.Read("nascosto", jobId);
-            else
-                nascosto = "NO";
+            if (res) {
+                annuncio.Nascosto = mydata.Read("nascosto", jobId);
+                annuncio.Evidenzia = mydata.Read("evidenzia", jobId);
+            } else {
+                annuncio.Nascosto = "NO";
+                annuncio.Evidenzia = "NO";
+            }
 
             mydata = null;
             return res;

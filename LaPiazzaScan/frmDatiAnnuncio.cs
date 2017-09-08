@@ -12,8 +12,8 @@ namespace LaPiazzaScan
             
             // carica dati
             string pathData = Path.Combine(Application.StartupPath, "datalist.ini");
-            string nascosto = "";
-            bool found = DatiAnnuncio.TrovaId(pathData, jobId, ref nascosto);
+            DatiAnnuncio annuncio = new DatiAnnuncio();
+            bool found = DatiAnnuncio.TrovaId(pathData, jobId, ref annuncio);
 
             if (found) {
                 FileIni ini = new FileIni();
@@ -21,6 +21,7 @@ namespace LaPiazzaScan
 
                 optSI.Checked = (ini.Read("contattato", jobId) == "SI");
                 chkNascondi.Checked = (ini.Read("nascosto", jobId) == "SI");
+                chkEvidenzia.Checked = (ini.Read("evidenzia", jobId) == "SI");
                 txtDataContatto.Text = ini.Read("data_contatto", jobId);
                 txtMsg.Text = parseRead(ini.Read("messaggio", jobId));
                 txtNote.Text = parseRead(ini.Read("note", jobId));
@@ -38,6 +39,11 @@ namespace LaPiazzaScan
                 Program.extraData.Nascosto = "SI";
             else
                 Program.extraData.Nascosto = "NO";
+
+            if (chkEvidenzia.Checked)
+                Program.extraData.Evidenzia = "SI";
+            else
+                Program.extraData.Evidenzia = "NO";
 
             Program.extraData.DataContatto = txtDataContatto.Text;
             Program.extraData.Messaggio = parseWrite(txtMsg.Text);

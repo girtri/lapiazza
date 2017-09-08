@@ -26,7 +26,7 @@ namespace LaPiazzaScan
             this.Cursor = Cursors.WaitCursor;
             bool first = true;
             string url;
-            string nascosto = "";
+            DatiAnnuncio annuncio = new DatiAnnuncio();
             bool found;
             string xpath1 = "//div[@class='item_content_in']";
             //string xpath2 = "//div[contains(@class, 'item_title')]";
@@ -55,14 +55,16 @@ namespace LaPiazzaScan
                     int s1 = link.IndexOf("offerte-lavoro&id=");
                     string jobId = link.Substring(s1 + 18, 5);
 
-                    found = DatiAnnuncio.TrovaId(_pathData, jobId, ref nascosto);
-                    if (chkMostraTutti.Checked || (nascosto == "NO")) {
+                    found = DatiAnnuncio.TrovaId(_pathData, jobId, ref annuncio);
+                    if (chkMostraTutti.Checked || (annuncio.Nascosto == "NO")) {
                         curRow++;
                         string[] values = { descr, link, jobId };
                         ListViewItem row = lsvResults.Items.Add(new ListViewItem(values));
 
-                        if (nascosto == "SI") {
+                        if (annuncio.Nascosto == "SI") {
                             row.BackColor = Color.LightBlue;
+                        } else if (annuncio.Evidenzia == "SI") {
+                            row.BackColor = Color.Yellow;
                         } else if (curRow % 2 == 0) {
                             row.BackColor = Color.LightGray;
                         } else {
@@ -74,7 +76,7 @@ namespace LaPiazzaScan
 
             // aggiornamento colonna dei già selezionati
             foreach (ListViewItem row in lsvResults.Items) {
-                found = DatiAnnuncio.TrovaId(_pathData, row.SubItems[2].Text, ref nascosto);
+                found = DatiAnnuncio.TrovaId(_pathData, row.SubItems[2].Text, ref annuncio);
                 row.Checked = found;
             }
 
@@ -91,8 +93,8 @@ namespace LaPiazzaScan
             string jobId = item.SubItems[2].Text;
 
             // aggiungere id alla lista degli annunci letti
-            string nascosto = "";
-            bool found = DatiAnnuncio.TrovaId(_pathData, jobId, ref nascosto);
+            DatiAnnuncio annuncio = new DatiAnnuncio();
+            bool found = DatiAnnuncio.TrovaId(_pathData, jobId, ref annuncio);
 
             if (!found) {
                 GeneraEntry(jobId);
@@ -118,9 +120,10 @@ namespace LaPiazzaScan
             using (StreamWriter sw = File.AppendText(_pathData)) {
                 sw.WriteLine("[" + jobId + "]");
                 sw.WriteLine("contattato=NO");
-                sw.WriteLine("data_contatto=none");
-                sw.WriteLine("messaggio=none");
-                sw.WriteLine("note=none");
+                sw.WriteLine("data_contatto=nessuna");
+                sw.WriteLine("messaggio=nessuno");
+                sw.WriteLine("note=nessuna");
+                sw.WriteLine("evidenzia=NO");
                 sw.WriteLine("nascosto=NO");
             }
         }
@@ -134,8 +137,8 @@ namespace LaPiazzaScan
                 formDatiExtra.ShowDialog();
 
                 if (!Program.extraData.Annulla) {
-                    string nascosto = "";
-                    bool found = DatiAnnuncio.TrovaId(_pathData, jobId, ref nascosto);
+                    DatiAnnuncio annuncio = new DatiAnnuncio();
+                    bool found = DatiAnnuncio.TrovaId(_pathData, jobId, ref annuncio);
                     if (!found) {
                         GeneraEntry(jobId);
                     }
@@ -144,17 +147,23 @@ namespace LaPiazzaScan
                     FileIni ini = new FileIni();
                     ini.IniFile(_pathData);
                     ini.Write("contattato", Program.extraData.Contattato, jobId);
-                    ini.Write("data_contatto", DateTime.Now.ToShortDateString(), jobId);
+                    if (Program.extraData.Contattato == "SI")
+                        ini.Write("data_contatto", DateTime.Now.ToShortDateString(), jobId);
                     ini.Write("messaggio", Program.extraData.Messaggio, jobId);
                     ini.Write("note", Program.extraData.Annotazioni, jobId);
                     ini.Write("nascosto", Program.extraData.Nascosto, jobId);
+                    ini.Write("evidenzia", Program.extraData.Evidenzia, jobId);
 
                     row.Checked = true;
-                    if (Program.extraData.Contattato == "SI")
-                        row.BackColor = Color.LightSalmon;
 
-                    if (Program.extraData.Nascosto == "SI")
+                    if (Program.extraData.Nascosto == "SI") {
                         lsvResults.Items.Remove(row);
+                    } else {
+                        if (Program.extraData.Contattato == "SI")
+                            row.BackColor = Color.LightSalmon;
+                        else if (Program.extraData.Evidenzia == "SI")
+                            row.BackColor = Color.Yellow;
+                    }
                 }
             }
         }

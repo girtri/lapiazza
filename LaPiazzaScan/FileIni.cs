@@ -34,8 +34,8 @@ namespace LaPiazzaScan
 
         public string Read(string Key, string Section = null)
         {
-            var RetVal = new StringBuilder(255);
-            GetPrivateProfileString(Section ?? _exe, Key, "", RetVal, 255, _path);
+            var RetVal = new StringBuilder(1000);
+            GetPrivateProfileString(Section ?? _exe, Key, "", RetVal, 1000, _path);
             return RetVal.ToString();
         }
 

@@ -40,6 +40,7 @@
             this.cmdSalva = new System.Windows.Forms.Button();
             this.cmdAnnulla = new System.Windows.Forms.Button();
             this.chkNascondi = new System.Windows.Forms.CheckBox();
+            this.chkEvidenzia = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblContatto
@@ -103,7 +104,7 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(32, 348);
+            this.label3.Location = new System.Drawing.Point(32, 316);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(183, 22);
             this.label3.TabIndex = 13;
@@ -111,20 +112,20 @@
             // 
             // txtMsg
             // 
-            this.txtMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMsg.Location = new System.Drawing.Point(35, 93);
             this.txtMsg.Multiline = true;
             this.txtMsg.Name = "txtMsg";
-            this.txtMsg.Size = new System.Drawing.Size(748, 236);
+            this.txtMsg.Size = new System.Drawing.Size(748, 205);
             this.txtMsg.TabIndex = 14;
             // 
             // txtNote
             // 
-            this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNote.Location = new System.Drawing.Point(35, 373);
+            this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNote.Location = new System.Drawing.Point(35, 341);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(748, 127);
+            this.txtNote.Size = new System.Drawing.Size(748, 159);
             this.txtNote.TabIndex = 15;
             // 
             // cmdSalva
@@ -153,18 +154,30 @@
             // 
             this.chkNascondi.AutoSize = true;
             this.chkNascondi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkNascondi.Location = new System.Drawing.Point(675, 22);
+            this.chkNascondi.Location = new System.Drawing.Point(697, 21);
             this.chkNascondi.Name = "chkNascondi";
             this.chkNascondi.Size = new System.Drawing.Size(86, 21);
             this.chkNascondi.TabIndex = 18;
             this.chkNascondi.Text = "Nascondi";
             this.chkNascondi.UseVisualStyleBackColor = true;
             // 
+            // chkEvidenzia
+            // 
+            this.chkEvidenzia.AutoSize = true;
+            this.chkEvidenzia.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkEvidenzia.Location = new System.Drawing.Point(576, 21);
+            this.chkEvidenzia.Name = "chkEvidenzia";
+            this.chkEvidenzia.Size = new System.Drawing.Size(88, 21);
+            this.chkEvidenzia.TabIndex = 19;
+            this.chkEvidenzia.Text = "Evidenzia";
+            this.chkEvidenzia.UseVisualStyleBackColor = true;
+            // 
             // frmDatiAnnuncio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 559);
+            this.Controls.Add(this.chkEvidenzia);
             this.Controls.Add(this.chkNascondi);
             this.Controls.Add(this.cmdAnnulla);
             this.Controls.Add(this.cmdSalva);
@@ -199,5 +212,6 @@
         private System.Windows.Forms.Button cmdSalva;
         private System.Windows.Forms.Button cmdAnnulla;
         private System.Windows.Forms.CheckBox chkNascondi;
+        private System.Windows.Forms.CheckBox chkEvidenzia;
     }
 }
