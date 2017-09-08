@@ -89,7 +89,7 @@
             this.topPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.topPages.Location = new System.Drawing.Point(83, 61);
             this.topPages.Maximum = new decimal(new int[] {
-            8,
+            30,
             0,
             0,
             0});
