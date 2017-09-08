@@ -26,12 +26,15 @@ namespace LaPiazzaScan
             this.Cursor = Cursors.WaitCursor;
             bool first = true;
             string url;
+            string nascosto = "";
+            bool found;
             string xpath1 = "//div[@class='item_content_in']";
             //string xpath2 = "//div[contains(@class, 'item_title')]";
 
             // From Web
             var web = new HtmlWeb();
             int curRow = 0;
+            lsvResults.Items.Clear();
 
             for (int i = 1; i <= topPages.Value; i++) {
                 if (first) {
@@ -44,7 +47,6 @@ namespace LaPiazzaScan
                 var doc = web.Load(url);
                 foreach (HtmlNode n in doc.DocumentNode.SelectNodes(xpath1)) {
                     HtmlNode n2 = n.SelectSingleNode("./div[@class='item_desc']");
-                    curRow++;
 
                     string descr = n2.ChildNodes[1].InnerText.Replace("\t", "");
                     string link = n2.ChildNodes[1].Attributes[0].Value;
@@ -53,19 +55,26 @@ namespace LaPiazzaScan
                     int s1 = link.IndexOf("offerte-lavoro&id=");
                     string jobId = link.Substring(s1 + 18, 5);
 
-                    string[] values = { descr, link, jobId };
-                    ListViewItem row = lsvResults.Items.Add(new ListViewItem(values));
-                    if (curRow % 2 == 0) {
-                        row.BackColor = Color.LightGray;
-                    } else {
-                        row.BackColor = Color.GhostWhite;
+                    found = DatiAnnuncio.TrovaId(_pathData, jobId, ref nascosto);
+                    if (chkMostraTutti.Checked || (nascosto == "NO")) {
+                        curRow++;
+                        string[] values = { descr, link, jobId };
+                        ListViewItem row = lsvResults.Items.Add(new ListViewItem(values));
+
+                        if (nascosto == "SI") {
+                            row.BackColor = Color.LightBlue;
+                        } else if (curRow % 2 == 0) {
+                            row.BackColor = Color.LightGray;
+                        } else {
+                            row.BackColor = Color.GhostWhite;
+                        }
                     }
                 }
             }
 
             // aggiornamento colonna dei già selezionati
             foreach (ListViewItem row in lsvResults.Items) {
-                bool found = DatiAnnuncio.TrovaId(_pathData, row.SubItems[2].Text);
+                found = DatiAnnuncio.TrovaId(_pathData, row.SubItems[2].Text, ref nascosto);
                 row.Checked = found;
             }
 
@@ -82,7 +91,8 @@ namespace LaPiazzaScan
             string jobId = item.SubItems[2].Text;
 
             // aggiungere id alla lista degli annunci letti
-            bool found = DatiAnnuncio.TrovaId(_pathData, jobId);
+            string nascosto = "";
+            bool found = DatiAnnuncio.TrovaId(_pathData, jobId, ref nascosto);
 
             if (!found) {
                 GeneraEntry(jobId);
@@ -111,6 +121,7 @@ namespace LaPiazzaScan
                 sw.WriteLine("data_contatto=none");
                 sw.WriteLine("messaggio=none");
                 sw.WriteLine("note=none");
+                sw.WriteLine("nascosto=NO");
             }
         }
 
@@ -123,7 +134,8 @@ namespace LaPiazzaScan
                 formDatiExtra.ShowDialog();
 
                 if (!Program.extraData.Annulla) {
-                    bool found = DatiAnnuncio.TrovaId(_pathData, jobId);
+                    string nascosto = "";
+                    bool found = DatiAnnuncio.TrovaId(_pathData, jobId, ref nascosto);
                     if (!found) {
                         GeneraEntry(jobId);
                     }
@@ -135,9 +147,14 @@ namespace LaPiazzaScan
                     ini.Write("data_contatto", DateTime.Now.ToShortDateString(), jobId);
                     ini.Write("messaggio", Program.extraData.Messaggio, jobId);
                     ini.Write("note", Program.extraData.Annotazioni, jobId);
+                    ini.Write("nascosto", Program.extraData.Nascosto, jobId);
 
                     row.Checked = true;
-                    row.BackColor = Color.LightSalmon;
+                    if (Program.extraData.Contattato == "SI")
+                        row.BackColor = Color.LightSalmon;
+
+                    if (Program.extraData.Nascosto == "SI")
+                        lsvResults.Items.Remove(row);
                 }
             }
         }

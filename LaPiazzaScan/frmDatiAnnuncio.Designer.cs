@@ -39,6 +39,7 @@
             this.txtNote = new System.Windows.Forms.TextBox();
             this.cmdSalva = new System.Windows.Forms.Button();
             this.cmdAnnulla = new System.Windows.Forms.Button();
+            this.chkNascondi = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // lblContatto
@@ -110,6 +111,7 @@
             // 
             // txtMsg
             // 
+            this.txtMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMsg.Location = new System.Drawing.Point(35, 93);
             this.txtMsg.Multiline = true;
             this.txtMsg.Name = "txtMsg";
@@ -118,6 +120,7 @@
             // 
             // txtNote
             // 
+            this.txtNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtNote.Location = new System.Drawing.Point(35, 373);
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
@@ -146,11 +149,23 @@
             this.cmdAnnulla.UseVisualStyleBackColor = true;
             this.cmdAnnulla.Click += new System.EventHandler(this.cmdAnnulla_Click);
             // 
+            // chkNascondi
+            // 
+            this.chkNascondi.AutoSize = true;
+            this.chkNascondi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkNascondi.Location = new System.Drawing.Point(675, 22);
+            this.chkNascondi.Name = "chkNascondi";
+            this.chkNascondi.Size = new System.Drawing.Size(86, 21);
+            this.chkNascondi.TabIndex = 18;
+            this.chkNascondi.Text = "Nascondi";
+            this.chkNascondi.UseVisualStyleBackColor = true;
+            // 
             // frmDatiAnnuncio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(809, 559);
+            this.Controls.Add(this.chkNascondi);
             this.Controls.Add(this.cmdAnnulla);
             this.Controls.Add(this.cmdSalva);
             this.Controls.Add(this.txtNote);
@@ -183,5 +198,6 @@
         private System.Windows.Forms.TextBox txtNote;
         private System.Windows.Forms.Button cmdSalva;
         private System.Windows.Forms.Button cmdAnnulla;
+        private System.Windows.Forms.CheckBox chkNascondi;
     }
 }

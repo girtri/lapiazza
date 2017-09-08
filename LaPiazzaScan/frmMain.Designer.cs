@@ -41,6 +41,7 @@
             this.actionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuEditItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTotAnn = new System.Windows.Forms.Label();
+            this.chkMostraTutti = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.topPages)).BeginInit();
             this.actionMenu.SuspendLayout();
             this.SuspendLayout();
@@ -164,11 +165,23 @@
             this.lblTotAnn.TabIndex = 6;
             this.lblTotAnn.Text = "Tot. Annunci:";
             // 
+            // chkMostraTutti
+            // 
+            this.chkMostraTutti.AutoSize = true;
+            this.chkMostraTutti.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkMostraTutti.Location = new System.Drawing.Point(942, 23);
+            this.chkMostraTutti.Name = "chkMostraTutti";
+            this.chkMostraTutti.Size = new System.Drawing.Size(126, 21);
+            this.chkMostraTutti.TabIndex = 7;
+            this.chkMostraTutti.Text = "Mostra nascosti";
+            this.chkMostraTutti.UseVisualStyleBackColor = true;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1103, 590);
+            this.Controls.Add(this.chkMostraTutti);
             this.Controls.Add(this.lblTotAnn);
             this.Controls.Add(this.lsvResults);
             this.Controls.Add(this.topPages);
@@ -200,6 +213,7 @@
         private System.Windows.Forms.ColumnHeader colID;
         private System.Windows.Forms.ContextMenuStrip actionMenu;
         private System.Windows.Forms.ToolStripMenuItem menuEditItem;
+        private System.Windows.Forms.CheckBox chkMostraTutti;
     }
 }
 
