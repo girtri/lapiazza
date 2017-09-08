@@ -45,32 +45,39 @@ namespace LaPiazzaScan
 
                 first = false;
                 var doc = web.Load(url);
-                foreach (HtmlNode n in doc.DocumentNode.SelectNodes(xpath1)) {
-                    HtmlNode n2 = n.SelectSingleNode("./div[@class='item_desc']");
 
-                    string descr = n2.ChildNodes[1].InnerText.Replace("\t", "");
-                    string link = n2.ChildNodes[1].Attributes[0].Value;
+                try {
+                    foreach (HtmlNode n in doc.DocumentNode.SelectNodes(xpath1)) {
+                        HtmlNode n2 = n.SelectSingleNode("./div[@class='item_desc']");
+                        string descr = n2.ChildNodes[1].InnerText.Replace("\t", "");
+                        string link = n2.ChildNodes[1].Attributes[0].Value;
 
-                    // determinazione dell'id annuncio
-                    int s1 = link.IndexOf("offerte-lavoro&id=");
-                    string jobId = link.Substring(s1 + 18, 5);
+                        // determinazione dell'id annuncio
+                        string jobId = LeggiJobId(link);
+                        /*
+                        int s1 = link.IndexOf("offerte-lavoro&id=");
+                        string jobId = link.Substring(s1 + 18, 5);
+                        */
 
-                    found = DatiAnnuncio.TrovaId(_pathData, jobId, ref annuncio);
-                    if (chkMostraTutti.Checked || (annuncio.Nascosto == "NO")) {
-                        curRow++;
-                        string[] values = { descr, link, jobId };
-                        ListViewItem row = lsvResults.Items.Add(new ListViewItem(values));
+                        found = DatiAnnuncio.TrovaId(_pathData, jobId, ref annuncio);
+                        if (chkMostraTutti.Checked || (annuncio.Nascosto == "NO")) {
+                            curRow++;
+                            string[] values = { descr, link, jobId };
+                            ListViewItem row = lsvResults.Items.Add(new ListViewItem(values));
 
-                        if (annuncio.Nascosto == "SI") {
-                            row.BackColor = Color.LightBlue;
-                        } else if (annuncio.Evidenzia == "SI") {
-                            row.BackColor = Color.Yellow;
-                        } else if (curRow % 2 == 0) {
-                            row.BackColor = Color.LightGray;
-                        } else {
-                            row.BackColor = Color.GhostWhite;
+                            if (annuncio.Nascosto == "SI") {
+                                row.BackColor = Color.LightBlue;
+                            } else if (annuncio.Evidenzia == "SI") {
+                                row.BackColor = Color.Yellow;
+                            } else if (curRow % 2 == 0) {
+                                row.BackColor = Color.LightGray;
+                            } else {
+                                row.BackColor = Color.GhostWhite;
+                            }
                         }
                     }
+                } catch {
+                    MessageBox.Show("la pagina: " + i + " non contiene annunci");
                 }
             }
 
@@ -113,6 +120,22 @@ namespace LaPiazzaScan
                     //sw.WriteLine("Hello");
                 }
             }
+        }
+
+        private string LeggiJobId(string link)
+        {
+            int s1 = link.IndexOf("offerte-lavoro&id=");
+            string linkPart = link.Substring(s1 + 18);
+            string res = string.Empty;
+
+            foreach(char c in linkPart){
+                if (c == ':')
+                    break;
+                else
+                    res += c;
+            }
+
+            return res;
         }
 
         private void GeneraEntry(string jobId)

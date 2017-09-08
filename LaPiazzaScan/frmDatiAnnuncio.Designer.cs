@@ -155,7 +155,7 @@
             // 
             this.chkNascondi.AutoSize = true;
             this.chkNascondi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkNascondi.Location = new System.Drawing.Point(697, 21);
+            this.chkNascondi.Location = new System.Drawing.Point(576, 23);
             this.chkNascondi.Name = "chkNascondi";
             this.chkNascondi.Size = new System.Drawing.Size(86, 21);
             this.chkNascondi.TabIndex = 18;
@@ -166,7 +166,7 @@
             // 
             this.chkEvidenzia.AutoSize = true;
             this.chkEvidenzia.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkEvidenzia.Location = new System.Drawing.Point(576, 21);
+            this.chkEvidenzia.Location = new System.Drawing.Point(695, 23);
             this.chkEvidenzia.Name = "chkEvidenzia";
             this.chkEvidenzia.Size = new System.Drawing.Size(88, 21);
             this.chkEvidenzia.TabIndex = 19;

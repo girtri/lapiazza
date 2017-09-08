@@ -90,7 +90,7 @@
             this.topPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.topPages.Location = new System.Drawing.Point(83, 61);
             this.topPages.Maximum = new decimal(new int[] {
-            30,
+            15,
             0,
             0,
             0});
@@ -103,7 +103,7 @@
             this.topPages.Size = new System.Drawing.Size(36, 21);
             this.topPages.TabIndex = 4;
             this.topPages.Value = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
