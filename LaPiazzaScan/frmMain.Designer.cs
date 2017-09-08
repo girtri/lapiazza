@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.lblUrl = new System.Windows.Forms.Label();
             this.txtUrl = new System.Windows.Forms.TextBox();
             this.cmdScan = new System.Windows.Forms.Button();
@@ -189,6 +190,7 @@
             this.Controls.Add(this.cmdScan);
             this.Controls.Add(this.txtUrl);
             this.Controls.Add(this.lblUrl);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
             this.Text = "LaPiazza scanner";
             this.Load += new System.EventHandler(this.frmMain_Load);

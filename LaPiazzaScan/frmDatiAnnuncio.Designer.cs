@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDatiAnnuncio));
             this.lblContatto = new System.Windows.Forms.Label();
             this.optSI = new System.Windows.Forms.RadioButton();
             this.optNO = new System.Windows.Forms.RadioButton();
@@ -190,6 +191,7 @@
             this.Controls.Add(this.optNO);
             this.Controls.Add(this.optSI);
             this.Controls.Add(this.lblContatto);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmDatiAnnuncio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dati Extra";
