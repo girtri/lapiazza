@@ -188,6 +188,8 @@ namespace LaPiazzaScan
                             row.BackColor = Color.LightSalmon;
                         else if (Program.extraData.Evidenzia == "SI")
                             row.BackColor = Color.Yellow;
+                        else
+                            row.BackColor = Color.GhostWhite;
                     }
                 }
             }
