@@ -14,7 +14,7 @@ namespace LaPiazzaScan
 {
     public partial class frmMain : Form
     {
-        private string _pathData = Path.Combine(Application.StartupPath, "datalist.ini");
+        private string _pathData = Path.Combine(Application.StartupPath, @"..\..\annunci\datalist.ini");
 
         public frmMain()
         {
