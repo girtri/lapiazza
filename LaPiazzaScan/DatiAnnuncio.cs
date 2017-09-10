@@ -26,9 +26,11 @@ namespace LaPiazzaScan
             if (res) {
                 annuncio.Nascosto = mydata.Read("nascosto", jobId);
                 annuncio.Evidenzia = mydata.Read("evidenzia", jobId);
+                annuncio.Contattato = mydata.Read("contattato", jobId);
             } else {
                 annuncio.Nascosto = "NO";
                 annuncio.Evidenzia = "NO";
+                annuncio.Contattato = "NO";
             }
 
             mydata = null;

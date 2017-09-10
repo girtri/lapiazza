@@ -65,7 +65,9 @@ namespace LaPiazzaScan
                             string[] values = { descr, link, jobId };
                             ListViewItem row = lsvResults.Items.Add(new ListViewItem(values));
 
-                            if (annuncio.Nascosto == "SI") {
+                            if (annuncio.Contattato == "SI") {
+                                row.BackColor = Color.LightSalmon;
+                            } else if (annuncio.Nascosto == "SI") {
                                 row.BackColor = Color.LightBlue;
                             } else if (annuncio.Evidenzia == "SI") {
                                 row.BackColor = Color.Yellow;
