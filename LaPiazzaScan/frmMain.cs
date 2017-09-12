@@ -48,8 +48,9 @@ namespace LaPiazzaScan
 
                 try {
                     foreach (HtmlNode n in doc.DocumentNode.SelectNodes(xpath1)) {
+                        HtmlNode title = n.SelectSingleNode("./div[@class='item_title']/h3/a");
                         HtmlNode n2 = n.SelectSingleNode("./div[@class='item_desc']");
-                        string descr = n2.ChildNodes[1].InnerText.Replace("\t", "");
+                        string descr = title.InnerText + ' ' + n2.ChildNodes[1].InnerText.Replace("\t", "");
                         string link = n2.ChildNodes[1].Attributes[0].Value;
 
                         // determinazione dell'id annuncio
