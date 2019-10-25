@@ -43,6 +43,9 @@
             this.menuEditItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTotAnn = new System.Windows.Forms.Label();
             this.chkMostraTutti = new System.Windows.Forms.CheckBox();
+            this.colLuogo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colOwner = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.topPages)).BeginInit();
             this.actionMenu.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +66,7 @@
             this.txtUrl.Name = "txtUrl";
             this.txtUrl.Size = new System.Drawing.Size(686, 21);
             this.txtUrl.TabIndex = 1;
-            this.txtUrl.Text = "http://annuncilapiazza.it/ricerca/annunci?se=1&search=Cerca&se_cats%5B%5D=80";
+            this.txtUrl.Text = "https://www.lapiazza.it/ricerca?text&reg=05&cat=1108";
             // 
             // cmdScan
             // 
@@ -103,7 +106,7 @@
             this.topPages.Size = new System.Drawing.Size(36, 21);
             this.topPages.TabIndex = 4;
             this.topPages.Value = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});
@@ -116,6 +119,9 @@
             this.lsvResults.CheckBoxes = true;
             this.lsvResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.colTitle,
+            this.colLuogo,
+            this.colData,
+            this.colOwner,
             this.colLink,
             this.colID});
             this.lsvResults.ContextMenuStrip = this.actionMenu;
@@ -123,7 +129,7 @@
             this.lsvResults.FullRowSelect = true;
             this.lsvResults.Location = new System.Drawing.Point(15, 98);
             this.lsvResults.Name = "lsvResults";
-            this.lsvResults.Size = new System.Drawing.Size(1076, 480);
+            this.lsvResults.Size = new System.Drawing.Size(1176, 536);
             this.lsvResults.TabIndex = 5;
             this.lsvResults.UseCompatibleStateImageBehavior = false;
             this.lsvResults.View = System.Windows.Forms.View.Details;
@@ -132,7 +138,7 @@
             // colTitle
             // 
             this.colTitle.Text = "Titolo";
-            this.colTitle.Width = 700;
+            this.colTitle.Width = 500;
             // 
             // colLink
             // 
@@ -142,6 +148,7 @@
             // colID
             // 
             this.colID.Text = "ID";
+            this.colID.Width = 50;
             // 
             // actionMenu
             // 
@@ -177,11 +184,26 @@
             this.chkMostraTutti.Text = "Mostra nascosti";
             this.chkMostraTutti.UseVisualStyleBackColor = true;
             // 
+            // colLuogo
+            // 
+            this.colLuogo.Text = "Luogo";
+            this.colLuogo.Width = 100;
+            // 
+            // colData
+            // 
+            this.colData.Text = "Data";
+            this.colData.Width = 120;
+            // 
+            // colOwner
+            // 
+            this.colOwner.Text = "Inserito da";
+            this.colOwner.Width = 100;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1103, 590);
+            this.ClientSize = new System.Drawing.Size(1203, 646);
             this.Controls.Add(this.chkMostraTutti);
             this.Controls.Add(this.lblTotAnn);
             this.Controls.Add(this.lsvResults);
@@ -192,7 +214,7 @@
             this.Controls.Add(this.lblUrl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMain";
-            this.Text = "LaPiazza scanner";
+            this.Text = "LaPiazza scanner (v 2.0)";
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.topPages)).EndInit();
             this.actionMenu.ResumeLayout(false);
@@ -216,6 +238,9 @@
         private System.Windows.Forms.ContextMenuStrip actionMenu;
         private System.Windows.Forms.ToolStripMenuItem menuEditItem;
         private System.Windows.Forms.CheckBox chkMostraTutti;
+        private System.Windows.Forms.ColumnHeader colLuogo;
+        private System.Windows.Forms.ColumnHeader colData;
+        private System.Windows.Forms.ColumnHeader colOwner;
     }
 }
 

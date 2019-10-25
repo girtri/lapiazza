@@ -15,6 +15,7 @@ namespace LaPiazzaScan
     public partial class frmMain : Form
     {
         private string _pathData = Path.Combine(Application.StartupPath, @"..\..\annunci\datalist.ini");
+        const int colJobID = 5;
 
         public frmMain()
         {
@@ -25,45 +26,49 @@ namespace LaPiazzaScan
         {
             this.Cursor = Cursors.WaitCursor;
             bool first = true;
-            string url;
+            string url, baseUrl;
             DatiAnnuncio annuncio = new DatiAnnuncio();
             bool found;
-            string xpath1 = "//div[@class='item_content_in']";
-            //string xpath2 = "//div[contains(@class, 'item_title')]";
+            string xpath1 = "//div[@class='colonna-annunci col']/div[contains(@class,'row no-gutters annuncio')]"; // "//div[@class='item_content_in']";
 
             // From Web
             var web = new HtmlWeb();
             int curRow = 0;
             lsvResults.Items.Clear();
+            baseUrl = txtUrl.Text; // kttps://www.lapiazza.it/ricerca?text&reg=05&cat=1108
 
             for (int i = 1; i <= topPages.Value; i++) {
-                if (first) {
-                    url = txtUrl.Text;
+                if (!first) {
+                    url = baseUrl;
                 } else {
-                    url = @"http://annuncilapiazza.it/ricerca/annunci?se=1&search=Cerca&se_cats[0]=80&start=" + (14 * (i - 1));
+                    url = baseUrl + "&page=" + i;
                 }
 
                 first = false;
                 var doc = web.Load(url);
 
                 try {
-                    foreach (HtmlNode n in doc.DocumentNode.SelectNodes(xpath1)) {
-                        HtmlNode title = n.SelectSingleNode("./div[@class='item_title']/h3/a");
-                        HtmlNode n2 = n.SelectSingleNode("./div[@class='item_desc']");
-                        string descr = title.InnerText + ' ' + n2.ChildNodes[1].InnerText.Replace("\t", "");
-                        string link = n2.ChildNodes[1].Attributes[0].Value;
+                    HtmlNodeCollection annunci = doc.DocumentNode.SelectNodes(xpath1);
 
-                        // determinazione dell'id annuncio
-                        string jobId = LeggiJobId(link);
-                        /*
-                        int s1 = link.IndexOf("offerte-lavoro&id=");
-                        string jobId = link.Substring(s1 + 18, 5);
-                        */
+                    foreach (HtmlNode n in annunci) {
+                        HtmlNode title = n.SelectSingleNode("./div/div[@class='row no-gutters mb-auto']/a");
+                        string descr = title.InnerText; //  n2.ChildNodes[1].InnerText.Replace("\t", "");
+                        string jobId = title.Attributes["href"].Value;
+                        string link = "www.lapiazza.it" + jobId;
+
+                        // extra info: Luogo
+                        string luogo = n.SelectSingleNode("./div/p[@class='icon-right order-0']").InnerText.Replace("\n","").Trim();
+
+                        // extra info: Data e Inserzionista
+                        HtmlNode info = n.SelectSingleNode("./div/p[@class='color-brown-grey order-2 order-md-1']");
+                        string dataOra = info.SelectSingleNode("./span[@class='mr-2 d-none d-md-inline']").InnerText.Replace("\n","").Trim();
+                        string owner = info.SelectSingleNode("./span[@class='fs12md']").InnerText.Replace("Inserzionista: ", "");
 
                         found = DatiAnnuncio.TrovaId(_pathData, jobId, ref annuncio);
+
                         if (chkMostraTutti.Checked || (annuncio.Nascosto == "NO")) {
                             curRow++;
-                            string[] values = { descr, link, jobId };
+                            string[] values = { descr, luogo, dataOra, owner, link, jobId };
                             ListViewItem row = lsvResults.Items.Add(new ListViewItem(values));
 
                             if (annuncio.Contattato == "SI") {
@@ -79,14 +84,15 @@ namespace LaPiazzaScan
                             }
                         }
                     }
-                } catch {
+                } catch (Exception err) {
+                    MessageBox.Show(err.Message);
                     MessageBox.Show("la pagina: " + i + " non contiene annunci");
                 }
             }
 
             // aggiornamento colonna dei già selezionati
             foreach (ListViewItem row in lsvResults.Items) {
-                found = DatiAnnuncio.TrovaId(_pathData, row.SubItems[2].Text, ref annuncio);
+                found = DatiAnnuncio.TrovaId(_pathData, row.SubItems[colJobID].Text, ref annuncio);
                 row.Checked = found;
             }
 
@@ -99,8 +105,8 @@ namespace LaPiazzaScan
             ListViewItem item = lsvResults.SelectedItems[0];
             item.Checked = true;
 
-            string link = @"http://annuncilapiazza.it/ricerca/" + item.SubItems[1].Text;
-            string jobId = item.SubItems[2].Text;
+            string link = @"https://www.lapiazza.it" + item.SubItems[1].Text;
+            string jobId = item.SubItems[colJobID].Text;
 
             // aggiungere id alla lista degli annunci letti
             DatiAnnuncio annuncio = new DatiAnnuncio();
@@ -125,6 +131,7 @@ namespace LaPiazzaScan
             }
         }
 
+        /*
         private string LeggiJobId(string link)
         {
             int s1 = link.IndexOf("offerte-lavoro&id=");
@@ -140,6 +147,7 @@ namespace LaPiazzaScan
 
             return res;
         }
+        */
 
         private void GeneraEntry(string jobId)
         {
@@ -158,7 +166,7 @@ namespace LaPiazzaScan
         {
             if (lsvResults.SelectedItems.Count > 0) {
                 ListViewItem row = lsvResults.SelectedItems[0];
-                string jobId = row.SubItems[2].Text;
+                string jobId = row.SubItems[colJobID].Text;
                 frmDatiAnnuncio formDatiExtra = new frmDatiAnnuncio(jobId);
                 formDatiExtra.ShowDialog();
 
