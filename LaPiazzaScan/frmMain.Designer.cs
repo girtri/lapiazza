@@ -37,15 +37,15 @@
             this.topPages = new System.Windows.Forms.NumericUpDown();
             this.lsvResults = new System.Windows.Forms.ListView();
             this.colTitle = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colLuogo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colOwner = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colLink = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.actionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuEditItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTotAnn = new System.Windows.Forms.Label();
             this.chkMostraTutti = new System.Windows.Forms.CheckBox();
-            this.colLuogo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colData = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.colOwner = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.topPages)).BeginInit();
             this.actionMenu.SuspendLayout();
             this.SuspendLayout();
@@ -104,7 +104,7 @@
             0});
             this.topPages.Name = "topPages";
             this.topPages.Size = new System.Drawing.Size(36, 21);
-            this.topPages.TabIndex = 4;
+            this.topPages.TabIndex = 5;
             this.topPages.Value = new decimal(new int[] {
             1,
             0,
@@ -139,6 +139,21 @@
             // 
             this.colTitle.Text = "Titolo";
             this.colTitle.Width = 500;
+            // 
+            // colLuogo
+            // 
+            this.colLuogo.Text = "Luogo";
+            this.colLuogo.Width = 100;
+            // 
+            // colData
+            // 
+            this.colData.Text = "Data";
+            this.colData.Width = 120;
+            // 
+            // colOwner
+            // 
+            this.colOwner.Text = "Inserito da";
+            this.colOwner.Width = 100;
             // 
             // colLink
             // 
@@ -183,21 +198,6 @@
             this.chkMostraTutti.TabIndex = 7;
             this.chkMostraTutti.Text = "Mostra nascosti";
             this.chkMostraTutti.UseVisualStyleBackColor = true;
-            // 
-            // colLuogo
-            // 
-            this.colLuogo.Text = "Luogo";
-            this.colLuogo.Width = 100;
-            // 
-            // colData
-            // 
-            this.colData.Text = "Data";
-            this.colData.Width = 120;
-            // 
-            // colOwner
-            // 
-            this.colOwner.Text = "Inserito da";
-            this.colOwner.Width = 100;
             // 
             // frmMain
             // 

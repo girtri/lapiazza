@@ -1,20 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Configuration;
 using HtmlAgilityPack;
 
 namespace LaPiazzaScan
 {
     public partial class frmMain : Form
     {
-        private string _pathData = Path.Combine(Application.StartupPath, @"..\..\annunci\datalist.ini");
+        private string _pathData = Path.Combine(Application.StartupPath, "datalist.ini");
         const int colJobID = 5;
 
         public frmMain()
@@ -38,7 +33,7 @@ namespace LaPiazzaScan
             baseUrl = txtUrl.Text; // kttps://www.lapiazza.it/ricerca?text&reg=05&cat=1108
 
             for (int i = 1; i <= topPages.Value; i++) {
-                if (!first) {
+                if (first) {
                     url = baseUrl;
                 } else {
                     url = baseUrl + "&page=" + i;
@@ -105,7 +100,7 @@ namespace LaPiazzaScan
             ListViewItem item = lsvResults.SelectedItems[0];
             item.Checked = true;
 
-            string link = @"https://www.lapiazza.it" + item.SubItems[1].Text;
+            string link = @"https://www.lapiazza.it" + item.SubItems[colJobID].Text;
             string jobId = item.SubItems[colJobID].Text;
 
             // aggiungere id alla lista degli annunci letti
@@ -122,6 +117,7 @@ namespace LaPiazzaScan
         private void frmMain_Load(object sender, EventArgs e)
         {
             Program.extraData = new DatiAnnuncio();
+            topPages.Value = Convert.ToDecimal(ConfigurationManager.AppSettings["topPages"]);
 
             if (!File.Exists(_pathData)) {
                 // Create a file to write to.
