@@ -11,7 +11,7 @@ namespace LaPiazzaScan
             InitializeComponent();
             
             // carica dati
-            string pathData = Path.Combine(Application.StartupPath, @"..\..\annunci\datalist.ini");
+            string pathData = Path.Combine(Application.StartupPath, "datalist.ini");
             DatiAnnuncio annuncio = new DatiAnnuncio();
             bool found = DatiAnnuncio.TrovaId(pathData, jobId, ref annuncio);
 

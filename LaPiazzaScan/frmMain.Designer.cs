@@ -43,6 +43,8 @@
             this.colLink = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.colID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.actionMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuApri = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuSep01 = new System.Windows.Forms.ToolStripSeparator();
             this.menuEditItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblTotAnn = new System.Windows.Forms.Label();
             this.chkMostraTutti = new System.Windows.Forms.CheckBox();
@@ -168,21 +170,35 @@
             // actionMenu
             // 
             this.actionMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuApri,
+            this.menuSep01,
             this.menuEditItem});
             this.actionMenu.Name = "actionMenu";
-            this.actionMenu.Size = new System.Drawing.Size(95, 26);
+            this.actionMenu.Size = new System.Drawing.Size(152, 54);
+            // 
+            // menuApri
+            // 
+            this.menuApri.Name = "menuApri";
+            this.menuApri.Size = new System.Drawing.Size(151, 22);
+            this.menuApri.Text = "Apri Annuncio";
+            this.menuApri.Click += new System.EventHandler(this.menuApri_Click);
+            // 
+            // menuSep01
+            // 
+            this.menuSep01.Name = "menuSep01";
+            this.menuSep01.Size = new System.Drawing.Size(148, 6);
             // 
             // menuEditItem
             // 
             this.menuEditItem.Name = "menuEditItem";
-            this.menuEditItem.Size = new System.Drawing.Size(94, 22);
+            this.menuEditItem.Size = new System.Drawing.Size(151, 22);
             this.menuEditItem.Text = "Edit";
             this.menuEditItem.Click += new System.EventHandler(this.menuEditItem_Click);
             // 
             // lblTotAnn
             // 
             this.lblTotAnn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotAnn.Location = new System.Drawing.Point(779, 63);
+            this.lblTotAnn.Location = new System.Drawing.Point(939, 63);
             this.lblTotAnn.Name = "lblTotAnn";
             this.lblTotAnn.Size = new System.Drawing.Size(146, 22);
             this.lblTotAnn.TabIndex = 6;
@@ -241,6 +257,8 @@
         private System.Windows.Forms.ColumnHeader colLuogo;
         private System.Windows.Forms.ColumnHeader colData;
         private System.Windows.Forms.ColumnHeader colOwner;
+        private System.Windows.Forms.ToolStripMenuItem menuApri;
+        private System.Windows.Forms.ToolStripSeparator menuSep01;
     }
 }
 
