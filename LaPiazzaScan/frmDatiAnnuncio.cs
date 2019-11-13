@@ -6,6 +6,8 @@ namespace LaPiazzaScan
 {
     public partial class frmDatiAnnuncio : Form
     {
+        private bool _chiusuraVerificata = false;
+
         public frmDatiAnnuncio(string jobId)
         {
             InitializeComponent();
@@ -49,12 +51,14 @@ namespace LaPiazzaScan
             Program.extraData.Messaggio = parseWrite(txtMsg.Text);
             Program.extraData.Annotazioni = parseWrite(txtNote.Text);
             Program.extraData.Annulla = false;
+            _chiusuraVerificata = true;
             this.Close();
         }
 
         private void cmdAnnulla_Click(object sender, EventArgs e)
         {
             Program.extraData.Annulla = true;
+            _chiusuraVerificata = true;
             this.Close();
         }
 
@@ -70,6 +74,16 @@ namespace LaPiazzaScan
             string res;
             res = data.Replace("\r\n", "|n");
             return res;
+        }
+
+        private void frmDatiAnnuncio_Load(object sender, EventArgs e)
+        {
+            // code
+        }
+
+        private void frmDatiannuncio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!_chiusuraVerificata) Program.extraData.Annulla = true;
         }
     }
 }

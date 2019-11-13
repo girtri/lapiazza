@@ -1,4 +1,7 @@
-﻿namespace LaPiazzaScan
+﻿using System;
+using System.Windows.Forms;
+
+namespace LaPiazzaScan
 {
     partial class frmDatiAnnuncio
     {
@@ -195,6 +198,8 @@
             this.Name = "frmDatiAnnuncio";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Dati Extra";
+            this.Load += new System.EventHandler(this.frmDatiAnnuncio_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmDatiannuncio_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
